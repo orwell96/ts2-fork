@@ -71,6 +71,8 @@ class ServiceListView(QtWidgets.QTreeView):
         serviceListView.
         It emits the serviceSelected signal for others to connect to."""
         super().selectionChanged(selected, deselected)
+        if len(selected.indexes())==0:
+            return
         index = selected.indexes()[0]
         if index.isValid():
             self.serviceSelected.emit(index.data())

@@ -470,9 +470,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     QtWidgets.QMessageBox.Ok
                 )
                 self.simulation = None
-            except Exception as err:
-                dialogs.ExceptionDialog.popupException(self, err)
-                self.simulation = None
+            #except Exception as err:
+            #    dialogs.ExceptionDialog.popupException(self, err)
+            #    self.simulation = None
             else:
                 self.setWindowTitle(self.tr(
                     "ts2 - Train Signalling Simulator - %s") % fileName)
@@ -697,8 +697,9 @@ class MainWindow(QtWidgets.QMainWindow):
         menu.clear()
         act = []
         for fileName in settings.getRecent():
-            if os.path.exists(fileName):
-                act.append(menu.addAction(fileName))
+            if fileName is not None:
+                if os.path.exists(fileName):
+                    act.append(menu.addAction(fileName))
 
     def onRecent(self, act):
         """Open a  recent item"""
