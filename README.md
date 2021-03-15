@@ -1,7 +1,21 @@
-# TS2 - Train Signalling Simulation
+# TS2-Fork - Train Signalling Simulation
 
-version 0.6
+## Motivation of this fork
 
+This is a fork of the 0.6 version of http://github.com/ts2/ts2 created by npiganeau. 0.6 was the last version before the "New Arch" was implemented, where the actual simulation was split off into a simulation server written in Go. The project is pretty dead since 2019, and this is an attempt to revive it and continue development.
+I have decided to continue on the base of 0.6 for the following reasons:
+- Since introduction of the sim server, there have not been many new features
+- The client is still full of old code from the 0.6 era, which appears to cause various subtle problems.
+- I have exactly zero experience with Go, and am not in the mood right now to learn another programming language just for this
+- In my opinion, a client-server concept is good, but the server should be written in Python too so that it can share code with the client and the editor.
+
+My roadmap for this project is as follows:
+- First, bring it to a state where it is usable and mostly bug-free in the current architecture
+- Write one or two more simulations (probably Görlitz) to further debug it
+- Think about new features
+- Maybe separate the data model from the view layer so that, in a later stage, client and server can be separated.
+
+Below is the original content of the README at the time of the fork. It will be rewritten at some point to reflect a more up-to-date state.
 
 **IMPORTANT**
 - The 0.5 version and this `master`branch is the **last version to use PyQt4** 
