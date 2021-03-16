@@ -472,6 +472,7 @@ class Train(QtCore.QObject):
             self.setInitialDelay()
             self.updateMinimumStopTime()
             self.activate(simulation.currentTime)
+
             self.simulation.timeElapsed.connect(self.advance)
             self.simulation.timeChanged.connect(self.activate)
             self.trainStatusChanged.connect(simulation.trainStatusChanged)
@@ -485,6 +486,12 @@ class Train(QtCore.QObject):
             self.splitTrainRequested.connect(
                 simulation.simulationWindow.openSplitTrainWindow
             )
+            
+            if self.isOnScenery():
+                # update the berth on the next signal
+                sig = self.findNextSignal()
+                if sig is not None:
+                    sig.trainId = self.trainId
         self._parameters = None
 
     def for_json(self):
