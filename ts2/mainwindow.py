@@ -433,9 +433,18 @@ class MainWindow(QtWidgets.QMainWindow):
             self.loadSimulation(self.fileName)
 
     def onOpenSimulation(self):
-        d = opendialog.OpenDialog(self)
-        d.openFile.connect(self.loadSimulation)
-        d.exec_()
+        #d = opendialog.OpenDialog(self)
+        #d.openFile.connect(self.loadSimulation)
+        #d.exec_()
+        dialog = QtWidgets.QFileDialog(self)
+        dialog.setWindowTitle('Open Simulation')
+        dialog.setNameFilters(['All supported files (*.tss *.tsg *.json)',
+                'TS2 simulation (*.tss)', 'TS2 game file (*.tsg)', 'JSON file (*.json)'])
+        dialog.setDirectory(QtCore.QDir.currentPath())
+        dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
+        if dialog.exec_() == QtWidgets.QDialog.Accepted:
+            file_full_path = str(dialog.selectedFiles()[0])
+            self.loadSimulation(file_full_path)
 
     @QtCore.pyqtSlot(str)
     def loadSimulation(self, fileName=None):
@@ -470,9 +479,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     QtWidgets.QMessageBox.Ok
                 )
                 self.simulation = None
-            #except Exception as err:
-            #    dialogs.ExceptionDialog.popupException(self, err)
-            #    self.simulation = None
+            except Exception as err:
+                dialogs.ExceptionDialog.popupException(self, err)
+                self.simulation = None
             else:
                 self.setWindowTitle(self.tr(
                     "ts2 - Train Signalling Simulator - %s") % fileName)
@@ -594,7 +603,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def saveGame(self):
         """Saves the current game to file."""
         if self.simulation is not None:
-            self.panel.pauseButton.click()
+            self.simulation.pause()
             fileName, _ = QtWidgets.QFileDialog.getSaveFileName(
                 self,
                 self.tr("Save the simulation as"),
