@@ -614,7 +614,7 @@ class EditorWindow(QtWidgets.QMainWindow):
             else:
                 self.closed.emit()
 
-    @QtCore.pyqtSlot(int)
+    @QtCore.pyqtSlot()
     def setPropertiesModel(self):
         """Sets the TrackPropertiesModel related to the selection on the
         properties view"""
@@ -629,13 +629,14 @@ class EditorWindow(QtWidgets.QMainWindow):
     def loadSimulation(self, fileName=None):
         """Loads the simulation from ts2 file"""
         if not fileName:
-            fileName, _ = QtWidgets.QFileDialog.getOpenFileName(
-                self,
-                self.tr("Open a simulation"),
-                QtCore.QDir.currentPath(),
-                self.tr("TS2 files (*.ts2 *.json);;"
-                        "TS2 simulation files (*.ts2);;"
-                        "JSON simulation files (*.json)"))
+            dialog = QtWidgets.QFileDialog(self)
+            dialog.setWindowTitle('Open Simulation to edit')
+            dialog.setNameFilters(['All supported files (*.tss *.tsg *.json)',
+                    'TS2 simulation (*.tss)', 'TS2 saved game (*.tsg)', 'JSON file (*.json)'])
+            dialog.setDirectory(QtCore.QDir.currentPath())
+            dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
+            if dialog.exec_() == QtWidgets.QDialog.Accepted:
+                fileName = str(dialog.selectedFiles()[0])
 
         if fileName:
             self.statusBar().showMessage("Loading", info=True, timeout=2)
@@ -707,17 +708,19 @@ class EditorWindow(QtWidgets.QMainWindow):
         """Saves the simulation to a different database"""
         # DEBUG
         # fileName = "/home/nicolas/Progs/GitHub/ts2/data/drain-save.ts2"
-        fileName, _ = QtWidgets.QFileDialog.getSaveFileName(
-            self,
-            self.tr("Save the simulation as"),
-            QtCore.QDir.currentPath(),
-            self.tr("TS2 files (*.ts2 *.json);;"
-                    "TS2 simulation files (*.ts2);;"
-                    "JSON simulation files (*.json)"))
-        if fileName != "":
-            # check user entered extension (and set to .ts2 as default)
-            if not fileName.endswith(".ts2") and not fileName.endswith(".json"):
-                fileName += ".ts2"
+        dialog = QtWidgets.QFileDialog(self)
+        dialog.setWindowTitle('Save Simulation')
+        dialog.setNameFilters(['All supported files (*.tss *.tsg *.json)',
+                'TS2 simulation (*.tss)', 'TS2 saved game (*.tsg)', 'JSON file (*.json)'])
+        dialog.setDefaultSuffix("tss")
+        dialog.setDirectory(QtCore.QDir.currentPath())
+        dialog.setFileMode(QtWidgets.QFileDialog.AnyFile)
+        # preset the current file
+        if self.editor.fileName is not None:
+            dialog.selectFile(self.editor.fileName)
+
+        if dialog.exec_() == QtWidgets.QDialog.Accepted:
+            fileName = str(dialog.selectedFiles()[0])
             self.editor.fileName = fileName
             self.saveSimulation()
 

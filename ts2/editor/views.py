@@ -42,6 +42,8 @@ class RoutesEditorView(QtWidgets.QTableView):
         """Called when the user changes the selection. Emits the routeSelected
         signal"""
         super().selectionChanged(selected, deselected)
+        if len(selected.indexes())==0:
+            return
         index = selected.indexes()[0]
         if index.isValid():
             self.routeSelected.emit(index.data())
@@ -99,6 +101,8 @@ class ServicesEditorView(QtWidgets.QTableView):
         """Called when the user changes the selection. Emits the
         serviceSelected signal"""
         super().selectionChanged(selected, deselected)
+        if len(selected.indexes())==0:
+            return
         index = selected.indexes()[0]
         if index.isValid():
             self.serviceSelected.emit(index.data())
@@ -150,6 +154,8 @@ class TrainsEditorView(QtWidgets.QTableView):
         """Called when the user changes the selection. Emits the
         trainSelected signal"""
         super().selectionChanged(selected, deselected)
+        if len(selected.indexes())==0:
+            return
         index = selected.indexes()[0]
         if index.isValid():
             self.trainSelected.emit(self.model().index(index.row(), 0).data())

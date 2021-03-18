@@ -439,7 +439,7 @@ class MainWindow(QtWidgets.QMainWindow):
         dialog = QtWidgets.QFileDialog(self)
         dialog.setWindowTitle('Open Simulation')
         dialog.setNameFilters(['All supported files (*.tss *.tsg *.json)',
-                'TS2 simulation (*.tss)', 'TS2 game file (*.tsg)', 'JSON file (*.json)'])
+                'TS2 simulation (*.tss)', 'TS2 saved game (*.tsg)', 'JSON file (*.json)'])
         dialog.setDirectory(QtCore.QDir.currentPath())
         dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
