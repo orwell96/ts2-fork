@@ -397,7 +397,7 @@ class Editor(simulation.Simulation):
         # Set up file format version
         self.setOption("version", __FILE_FORMAT__)
 
-        if self.fileName.endswith(".ts2"):
+        if self.fileName.endswith(".tss") or self.fileName.endswith(".tsg"):
             with zipfile.ZipFile(self.fileName, "w") as zipArchive:
                 zipArchive.writestr("simulation.json",
                                     json.dumps(self, separators=(',', ':'),

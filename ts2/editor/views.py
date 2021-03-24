@@ -92,7 +92,7 @@ class ServicesEditorView(QtWidgets.QTableView):
         self.setSortingEnabled(True)
         self.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
-        self.setItemDelegateForColumn(4, delegates.TrainTypesDelegate(self))
+        self.setItemDelegateForColumn(3, delegates.TrainTypesDelegate(self))
 
     serviceSelected = QtCore.pyqtSignal(str)
     """Signal emitted when a Row selected"""

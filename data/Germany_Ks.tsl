@@ -1,0 +1,219 @@
+{
+    "__type__": "SignalLibrary",
+    "signalAspects": {
+        "DEKs_halt": {
+            "__type__": "SignalAspect",
+            "lineStyle": 0,
+            "outerShapes": [0, 0, 0, 0, 0, 0],
+            "outerColors": [0, 0, 0, 0, 0, 0],
+            "shapes": [1, 0, 0, 0, 0, 0],
+            "shapesColors": ["#FF0000", 0, 0, 0, 0, 0],
+            "actions": [[1, 0]]
+        },
+        "DEKs_halt_erw": {
+            "__type__": "SignalAspect",
+            "lineStyle": 0,
+            "outerShapes": [0, 0, 0, 0, 0, 0],
+            "outerColors": [0, 0, 0, 0, 0, 0],
+            "shapes": [1, 0, 0, 0, 0, 0],
+            "shapesColors": ["#FFFF00", 0, 0, 0, 0, 0],
+            "actions": [[2, 0]]
+        },
+        "DEKs_fahrt": {
+            "__type__": "SignalAspect",
+            "lineStyle": 0,
+            "outerShapes": [0, 0, 0, 0, 0, 0],
+            "outerColors": [0, 0, 0, 0, 0, 0],
+            "shapes": [1, 0, 0, 0, 0, 0],
+            "shapesColors": ["#00FF00", 0, 0, 0, 0, 0],
+            "actions": [[0, 999]]
+        },
+        "DEKs_rangierhalt": {
+            "__type__": "SignalAspect",
+            "lineStyle": 0,
+            "outerShapes": [0, 0, 0, 0, 0, 0],
+            "outerColors": [0, 0, 0, 0, 0, 0],
+            "shapes": [20, 0, 0, 0, 0, 0],
+            "shapesColors": ["#FF0000", 0, 0, 0, 0, 0],
+            "actions": [[1, 0]]
+        },
+        "DEKs_rangierfahrt": {
+            "__type__": "SignalAspect",
+            "lineStyle": 0,
+            "outerShapes": [0, 0, 0, 0, 0, 0],
+            "outerColors": [0, 0, 0, 0, 0, 0],
+            "shapes": [22, 0, 0, 0, 0, 0],
+            "shapesColors": ["#FFFFFF", 0, 0, 0, 0, 0],
+            "actions": [[0, 10]]
+        },
+        "DEKs_ueber_rangiersignal": {
+            "__type__": "SignalAspect",
+            "lineStyle": 0,
+            "outerShapes": [0, 0, 0, 0, 0, 0],
+            "outerColors": [0, 0, 0, 0, 0, 0],
+            "shapes": [22, 0, 0, 0, 0, 0],
+            "shapesColors": ["#FFFFFF", 0, 0, 0, 0, 0],
+            "actions": []
+        }
+    },
+    "signalTypes": {
+        "DEKs_main": {
+            "__type__": "SignalType",
+            "states": [
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_fahrt",
+                    "conditions": {
+                        "NEXT_ROUTE_ACTIVE": [],
+                        "TRAIN_NOT_PRESENT_ON_NEXT_ROUTE": [],
+                        "NEXT_SIGNAL_ASPECTS": [
+                            "DEKs_fahrt",
+                            "DEKs_halt_erw"
+                        ]
+                    }
+                },
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_halt_erw",
+                    "conditions": {
+                        "NEXT_ROUTE_ACTIVE": [],
+                        "TRAIN_NOT_PRESENT_ON_NEXT_ROUTE": [],
+                        "NEXT_SIGNAL_ASPECTS": [
+                            "DEKs_halt",
+                            "BUFFER"
+                        ]
+                    }
+                },
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_halt",
+                    "conditions": {}
+                }
+            ]
+        },
+        "DEKs_main_ra": {
+            "__type__": "SignalType",
+            "states": [
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_rangierfahrt",
+                    "conditions": {
+                        "NEXT_ROUTE_ACTIVE": [],
+                        "TRAIN_NOT_PRESENT_ON_NEXT_ROUTE": [],
+                        "ROUTES_SET": []
+                    }
+                },
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_fahrt",
+                    "conditions": {
+                        "NEXT_ROUTE_ACTIVE": [],
+                        "TRAIN_NOT_PRESENT_ON_NEXT_ROUTE": [],
+                        "NEXT_SIGNAL_ASPECTS": [
+                            "DEKs_fahrt",
+                            "DEKs_halt_erw"
+                        ]
+                    }
+                },
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_halt_erw",
+                    "conditions": {
+                        "NEXT_ROUTE_ACTIVE": [],
+                        "TRAIN_NOT_PRESENT_ON_NEXT_ROUTE": [],
+                        "NEXT_SIGNAL_ASPECTS": [
+                            "DEKs_halt",
+                            "BUFFER"
+                        ]
+                    }
+                },
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_halt",
+                    "conditions": {}
+                }
+            ]
+        },
+        "DEKs_main_TP": {
+            "__type__": "SignalType",
+            "states": [
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_fahrt",
+                    "conditions": {
+                        "TRAIN_NOT_PRESENT_ON_ITEMS": []
+                    }
+                },
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_halt",
+                    "conditions": {}
+                }
+            ]
+        },
+        "DEKs_main_far": {
+            "__type__": "SignalType",
+            "states": [
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_fahrt",
+                    "conditions": {
+                        "NEXT_ROUTE_ACTIVE": [],
+                        "TRAIN_NOT_PRESENT_ON_NEXT_ROUTE": []
+                    }
+                },
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_halt",
+                    "conditions": {}
+                }
+            ]
+        },
+        "DEKs_distant": {
+            "__type__": "SignalType",
+            "states": [
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_fahrt",
+                    "conditions": {
+                        "NEXT_SIGNAL_ASPECTS": [
+                            "DEKs_fahrt",
+                            "DEKs_halt_erw"
+                        ]
+                    }
+                },
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_halt_erw",
+                    "conditions": {}
+                }
+            ]
+        },
+        "DEKs_ra": {
+            "__type__": "SignalType",
+            "states": [
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_ueber_rangiersignal",
+                    "conditions": {
+                        "ROUTE_SET_ACROSS": []
+                    }
+                },
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_rangierfahrt",
+                    "conditions": {
+                        "NEXT_ROUTE_ACTIVE": [],
+                        "TRAIN_NOT_PRESENT_ON_NEXT_ROUTE": []
+                    }
+                },
+                {
+                    "__type__": "SignalState",
+                    "aspectName": "DEKs_rangierhalt",
+                    "conditions": {}
+                }
+            ]
+        }
+    }
+}
+

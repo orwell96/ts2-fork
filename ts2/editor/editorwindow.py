@@ -710,6 +710,7 @@ class EditorWindow(QtWidgets.QMainWindow):
         # fileName = "/home/nicolas/Progs/GitHub/ts2/data/drain-save.ts2"
         dialog = QtWidgets.QFileDialog(self)
         dialog.setWindowTitle('Save Simulation')
+        dialog.setAcceptMode(QtWidgets.QFileDialog.AcceptSave)
         dialog.setNameFilters(['All supported files (*.tss *.tsg *.json)',
                 'TS2 simulation (*.tss)', 'TS2 saved game (*.tsg)', 'JSON file (*.json)'])
         dialog.setDefaultSuffix("tss")
