@@ -1,5 +1,12 @@
 # TS2-Fork - Train Signalling Simulation
 
+## State of this repo
+
+The application in this repository, on the current state, is ts2 0.6 fixed up so that it is usable. If you want, you can take this as a somewhat working simulation game.
+However, it has some quirks right now, especially that single-track entries/exit points can not be defined. I also have gained some new feature ideas. Furthermore, the current software architecture is horrible.
+I have started working on an architecture rework. The results of this will be published in a new repository, probably on notabug.org, under a new name. Development will continue there.
+If you find a bug with this version, feel free to file a bug report. However, please don't suggest new features.
+
 ## Motivation of this fork
 
 This is a fork of the 0.6 version of http://github.com/ts2/ts2 created by npiganeau. 0.6 was the last version before the "New Arch" was implemented, where the actual simulation was split off into a simulation server written in Go. The project is pretty dead since 2019, and this is an attempt to revive it and continue development.
@@ -10,11 +17,12 @@ I have decided to continue on the base of 0.6 for the following reasons:
 - In my opinion, a client-server concept is good, but the server should be written in Python too so that it can share code with the client and the editor.
 
 My roadmap for this project is as follows:
-- First, bring it to a state where it is usable and mostly bug-free in the current architecture
+- First, bring it to a state where it is usable and mostly bug-free in the current architecture (done)
 - Write one or two more simulations (probably Görlitz) to further debug it
 - Think about new features
 - Maybe separate the data model from the view layer so that, in a later stage, client and server can be separated.
 
+## Original README
 Below is the original content of the README at the time of the fork. It will be rewritten at some point to reflect a more up-to-date state.
 
 **IMPORTANT**
